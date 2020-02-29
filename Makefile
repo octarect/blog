@@ -1,3 +1,4 @@
+NAME := blog
 BASE_URL := localhost
 
 .DEFAULT_GOAL := help
@@ -6,15 +7,20 @@ BASE_URL := localhost
 
 all:
 
-docker-image:
-	docker image build -t zolablog:dev -f Dockerfile.dev .
+%.image:
+	@if [ "$*" = "production" ]; then \
+		DOCKERFILE=Dockerfile; \
+	else \
+		DOCKERFILE=Dockerfile.$*; \
+	fi; \
+	docker image build -t $(NAME):$* -f $$DOCKERFILE .
 
-start-server: stop-server docker-image ## Start server
+start-server: stop-server dev.image ## Start server
 	docker container run --rm -d \
 		-p 1111:1111 -p 1000:1000 \
 		-v $(PWD):/var/www \
 		-e BASE_URL=$(BASE_URL) \
-		--name zolablog-dev zolablog:dev
+		--name $(NAME)-dev $(NAME):dev
 
 stop-server: ## Kill server process
 	docker container rm -f zolablog-dev 2>/dev/null || exit 0
