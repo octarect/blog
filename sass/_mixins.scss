@@ -1,0 +1,47 @@
+$breakpoint-width: 576px;
+@mixin mobile {
+	@media screen and (max-width: $breakpoint-width) {
+		@content;
+	}
+}
+
+@mixin desktop {
+	@media screen and (min-width: $breakpoint-width) {
+		@content;
+	}
+}
+
+$font-size: 16px;
+$line: 1.414;
+
+// golden
+// $font-upscale-rate: 1.618;
+
+// silver
+$font-upscale-rate: 1.414;
+
+$font-downscale-step: 0.1875;
+@mixin text-massive {
+	font-size: #{round($font-size * pow($font-upscale-rate, 3)) / $font-size}em;
+	line-height: $line;
+}
+@mixin text-huge {
+	font-size: #{round($font-size * pow($font-upscale-rate, 2)) / $font-size}em;
+	line-height: $line;
+}
+@mixin text-large {
+	font-size: #{round($font-size * pow($font-upscale-rate, 1)) / $font-size}em;
+	line-height: $line;
+}
+@mixin text-normal {
+	font-size: 1.0em;
+	line-height: $line;
+}
+@mixin text-small {
+	font-size: #{round($font-size * (1 - $font-downscale-step * 1)) / $font-size}em;
+	line-height: $line;
+}
+@mixin text-tiny {
+	font-size: #{round($font-size * (1 - $font-downscale-step * 2)) / $font-size}em;
+	line-height: $line;
+}

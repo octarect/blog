@@ -1,0 +1,42 @@
+{% import "macros.html" as macros %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <meta http-equiv="Cache-Control" content="public">
+    {{ "<!-- Enable responsiveness on mobile devices -->" | safe }}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="description" content="{% block description %}{{ config.description }}{% endblock description %}">
+
+    <title>{% block title %}{{ config.title }}{% endblock %}</title>
+
+    {% set theme_color = "ash" %}
+    <link rel="stylesheet" href="{{ get_url(path="css/vars/" ~ theme_color ~ ".css") }}">
+    <link rel="stylesheet" href="{{ get_url(path="style.css") }}">
+  </head>
+  <body>
+    <div class="wrapper flexible">
+      <header>
+        <a class="site-title" href="/">
+          {%- block header %}
+          <h1>{{ config.title }}</h1>
+          {%- endblock %}
+        </a>
+      </header>
+      <main>
+        {%- block main %}
+          {%- for page in paginator.pages %}
+            {{ macros::page_item(page=page) }}
+          {%- endfor %}
+        {%- endblock %}
+      </main>
+      <footer>
+        &copy; {{ now() | date(format="%Y") }} {{ config.extra.author }}.
+        <a href="https://creativecommons.org/licenses/by/3.0/">Some rights reserved</a>;<br>
+        Built with <a href="https://www.getzola.org/" target="_blank">Zola</a>
+      </footer>
+    </div>
+  </body>
+</html>

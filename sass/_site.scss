@@ -1,0 +1,196 @@
+$site-content-max-width: 768px;
+$site-margin-desktop: auto;
+$site-margin-mobile: 0.25rem;
+
+.wrapper {
+	height: 100%;
+	margin-top: 0;
+	margin-right: $site-margin-mobile;
+	margin-left: $site-margin-mobile;
+
+	@include desktop {
+		max-width: $site-content-max-width;
+		margin-right: $site-margin-desktop;
+		margin-left: $site-margin-desktop;
+	}
+
+	& > header {
+		.site-title {
+			* {
+				@include text-large;
+				line-height: $line;
+				margin-top: 0;
+				margin-bottom: 0;
+				color: var(--color);
+				display: inline-block;
+			}
+		}
+
+		ul.site-menu {
+			display: none;
+			flex-direction: column;
+			flex-wrap: wrap;
+			list-style: none;
+
+			li {
+				flex: 0 0 auto;
+				margin-right: spacing(2);
+				text-align: right;
+			}
+
+			@include desktop {
+				display: inline-flex;
+				flex-direction: row;
+
+				li {
+					text-align: left;
+				}
+			}
+		}
+
+		.site-menu-toggle {
+			display: inline-block;
+			float: right;
+			margin-right: spacing(1);
+			margin-top: spacing(1);
+
+			@include desktop {
+				display: none;
+				float: none;
+			}
+		}
+	}
+
+	& > footer {
+		min-height: 3.0em;
+	}
+}
+
+.flexible {
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+
+	main {
+		flex-grow: 1;
+	}
+}
+
+%lamphead {
+	padding-bottom: 0.25rem;
+	border-bottom: solid 2px #333;
+
+	&:before {
+		content: " ";
+		display: inline-block;
+		width: 8px;
+		height: #{$line}em;
+		background-color: var(--accent);
+		vertical-align: middle;
+		margin-right: 4px;
+	}
+}
+
+.page {
+	margin-bottom: spacing(3);
+	&-title {
+		@include text-large;
+		font-weight: 400;
+		margin-bottom: 0;
+	}
+
+	&-meta {
+		@include text-normal;
+
+		&-tag {
+			&:hover {
+				text-decoration: none;
+			}
+
+			mark {
+				padding-top: 0.2em;
+				padding-bottom: 0.2em;
+				padding-right: 0.4em;
+				padding-left: 0.4em;
+				background-color: var(--accent);
+				color: var(--background);
+				border: solid 1px #333;
+				// transition: background-color 0.5s linear;
+			}
+		}
+	}
+
+	&-summary {
+		@include text-normal;
+
+		display: flex;
+		flex-direction: column;
+		@include desktop {
+			flex-direction: row-reverse;
+		}
+
+		&-thumbnail {
+			flex: 1;
+			text-align: center;
+			margin-top: spacing(1);
+
+			@include desktop {
+				margin-top: 0;
+			}
+
+			> img {
+				max-width: 98%;
+
+				@include desktop {
+					max-width: 100%;
+				}
+
+				border: solid 1px #333;
+			}
+		}
+
+		&-content {
+			flex: 2.827;
+			> * {
+				margin-top: spacing(1);
+			}
+		}
+	}
+
+	&-content {
+		margin-top: spacing(3);
+
+		h1, h2 {
+			@extend %lamphead;
+
+			a {
+				text-decoration: none;
+			}
+		}
+	}
+}
+
+.btn-default {
+	display: inline-block;
+	padding: 0.1em 0.75em;
+	border: solid 1px black;
+	background-color: var(--default-background);
+	color: var(--default);
+	transition: background-color 0.1s linear;
+
+	&:hover {
+		text-decoration: none;
+		background-color: var(--default-hover);
+		color: inherit;
+	}
+}
+
+.btn-primary {
+	@extend .btn-default;
+	background-color: var(--primary-background);
+	color: var(--primary);
+
+	&:hover {
+		background-color: var(--primary-hover);
+	}
+}

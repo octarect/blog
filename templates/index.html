@@ -1,0 +1,58 @@
+{% import "macros.html" as macros %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <meta http-equiv="Cache-Control" content="public">
+    {{ "<!-- Enable responsiveness on mobile devices -->" | safe }}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="description" content="{% block description %}{{ config.description }}{% endblock description %}">
+
+    <title>{% block title %}{{ config.title }}{% endblock %}</title>
+
+    {% set theme_color = "ash" %}
+    <link rel="stylesheet" href="{{ get_url(path="css/vars/" ~ theme_color ~ ".css") }}">
+    <link rel="stylesheet" href="{{ get_url(path="style.css") }}">
+  </head>
+  <body>
+    <div class="wrapper flexible">
+      <header>
+        <a class="site-title" href="/">
+          {%- block header %}
+          <h1>{{ config.title }}</h1>
+          {%- endblock %}
+        </a>
+        <a class="site-menu-toggle" data-target=".site-menu">Menu</a>
+        <ul class="site-menu">
+          {% for item in config.extra.menu %}
+            <li>
+              {% if item.external %}
+                <a href="{{ item.url }}" target="_blank">{{ item.name }}</a>
+              {% else %}
+                <a href="{{ item.url }}">{{ item.name }}</a>
+              {% endif %}
+            </li>
+          {% endfor %}
+        </ul>
+      </header>
+      <main>
+        {%- block main %}
+          {% set posts_section = get_section(path = "posts/_index.md") %}
+          {% set posts = posts_section.pages %}
+          {%- for page in posts %}
+            {{ macros::page_item(page=page) }}
+          {%- endfor %}
+        {%- endblock %}
+      </main>
+      <footer>
+        &copy; {{ now() | date(format="%Y") }} {{ config.extra.author }}.
+        <a href="https://creativecommons.org/licenses/by/3.0/" target="_blank">Some rights reserved</a>;<br>
+        Built with <a href="https://www.getzola.org/" target="_blank">Zola</a>
+      </footer>
+    </div>
+
+  <script type="text/javascript" src="{{ get_url(path="js/app.js") }}" async="true">
+  </body>
+</html>

@@ -1,0 +1,20 @@
+@function pow($number, $exponent) {
+	$result: 1;
+
+	@if $exponent > 0 {
+		@for $i from 1 through $exponent {
+			$result: $result * $number;
+		}
+	} @else if $exponent < 0 {
+		@for $i from 1 through -$exponent {
+			$result: $result / $number;
+		}
+	}
+
+	@return $result;
+}
+
+$spacer: 0.5rem;
+@function spacing($scale) {
+	@return $spacer * $scale;
+}

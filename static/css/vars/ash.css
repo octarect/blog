@@ -1,0 +1,14 @@
+:root {
+    --background: #eeeeee;
+    --color: #212121;
+    --link: #2979ff;
+    --link-accent: #ff9100;
+    --accent: #212121;
+
+    --default: #212121;
+    --default-background: #bdbdbd;
+    --default-hover: #e0e0e0;
+    --primary: #f0f0f0;
+    --primary-background: #1e88e5;
+    --primary-hover: #42a5f5;
+}

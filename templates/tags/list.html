@@ -1,0 +1,22 @@
+{% extends "index.html" %}
+
+{% block title %}{{ taxonomy.name | capitalize }} | {{ super() }}{% endblock %}
+
+{% block header %}
+  <div>{{ config.title }}</div>
+{% endblock %}
+
+{% block main %}
+  <article class="page">
+    <h1 class="page-title">{{ taxonomy.name }}</h1>
+    <section>
+      <ul>
+        {% for term in terms%}
+        <li>
+          <a href="{{ term.permalink }}">#{{ term.name }}</a>
+        </li>
+        {% endfor %}
+      </ul>
+    </section>
+  </article>
+{% endblock %}

@@ -1,0 +1,75 @@
+html, body {
+	height: 100%;
+
+	font-size: 16px;
+	font-family: Roboto, Arial, sans-serif;
+}
+
+body {
+	background-color: var(--background);
+	color: var(--color);
+}
+
+a {
+	color: var(--link);
+	cursor: pointer;
+	text-decoration: none;
+
+	&:hover {
+		color: var(--link-accent);
+		text-decoration: underline;
+	}
+}
+
+img {
+	max-width: 100%;
+	box-sizing: initial;
+}
+
+h1, h2, h3, h4, h5 {
+	margin-top: 0.5rem;
+	margin-bottom: 0.5rem;
+	font-weight: 500;
+	line-height: 1.2;
+}
+h1 {
+	@include text-huge;
+}
+h2 {
+	@include text-large;
+}
+h3, h4, h5 {
+	@include text-normal;
+}
+
+small {
+	@include text-small;
+}
+
+p {
+	@include text-normal;
+}
+
+hr {
+	margin-bottom: spacing(1);
+}
+
+ul, ol {
+	margin-bottom: spacing(2);
+	margin-left: 1.0rem;
+}
+
+pre {
+	@include text-small;
+	padding-top: spacing(1);
+	padding-right: spacing(1);
+	padding-bottom: spacing(1);
+	padding-left: spacing(1);
+	margin-bottom: spacing(2);
+	overflow: auto;
+	line-height: 1.2;
+}
+
+mark, code {
+	@include text-small;
+}

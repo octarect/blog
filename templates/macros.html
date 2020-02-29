@@ -1,0 +1,68 @@
+{% macro dot_rgb(str) %}
+  {% set ss = str | split(pat=".") %}
+  {% set slen = ss | length %}
+  {% set colors = ["green", "blue"] %}
+  {% set clen = colors | length %}
+  {% for s in ss -%}
+    {%- if loop.first -%}
+      {% set dot = "" %}
+    {%- else -%}
+      {% set dot = "." %}
+    {%- endif -%}
+    {%- set ci = loop.index - (slen - clen) -%}
+    {%- if ci > 0 -%}
+      <span style="color: {{ colors | nth(n=(ci-1)) }}">{{ dot }}{{ s }}</span>
+    {%- else -%}
+      {{ dot }}{{ s }}
+    {%- endif -%}
+  {%- endfor %}
+{% endmacro %}
+
+{% macro page_item(page) %}
+  <article class="page">
+    <header>
+      <h2 class="page-title"><a href="{{ page.permalink }}">{{ page.title }}</a></h2>
+      <div class="page-meta">
+        {{ self::page_meta(page=page) }}
+      </div>
+    </header>
+    <section class="page-summary">
+      {% set image_url = self::get_page_thumbnail_url(page=page) %}
+      {% if image_url is containing(".") %}
+      <div class="page-summary-thumbnail">
+        <img src="{{ image_url }}" />
+      </div>
+      {% endif %}
+      <div class="page-summary-content">
+        <p>
+        {% if page.description %}
+          {{ page.description }}
+        {% else %}
+          {{ page.summary | default(value="") | striptags }}
+        {% endif %}
+        </p>
+        <a class="btn-default" href="{{ page.permalink }}#continue-reading">Read more</a>
+      </div>
+      <div class="page-summary-control">
+      </div>
+    </section>
+  </article>
+{% endmacro page_item %}
+
+{% macro page_meta(page) %}
+  <span>{{ page.date | date(format="%Y-%m-%d %H:%M") }}</span>
+  {%- if page.taxonomies.tags is defined %}
+    <span class="page-meta-separator">|</span>
+    {%- for tag in page.taxonomies.tags %}
+      <a href="{{ get_taxonomy_url(kind="tags", name=tag) | safe }}" class="page-meta-tag">
+        <mark>#{{ tag }}</mark>
+      </a>
+    {%- endfor %}
+  {%- endif %}
+  <span class="page-meta-separator">|</span>
+  <span>[<a href="#">Share</a>]</span>
+{% endmacro page_meta %}
+
+{% macro get_page_thumbnail_url(page) %}
+{{ page.content | split(pat="img src=") | nth(n=1) | split(pat='"') | nth(n=1) }}
+{% endmacro page_thumbnail %}
