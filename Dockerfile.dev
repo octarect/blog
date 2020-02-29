@@ -8,4 +8,4 @@ WORKDIR /var/www
 EXPOSE 1111
 EXPOSE 1000
 
-CMD /usr/bin/zola serve --interface=0.0.0.0 --base-url=${BASE_URL}
+CMD /usr/bin/zola serve --drafts --interface=0.0.0.0 --base-url=${BASE_URL}

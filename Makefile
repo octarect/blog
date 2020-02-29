@@ -23,7 +23,7 @@ start-server: stop-server dev.image ## Start server
 		--name $(NAME)-dev $(NAME):dev
 
 stop-server: ## Kill server process
-	docker container rm -f zolablog-dev 2>/dev/null || exit 0
+	docker container rm -f $(NAME)-dev 2>/dev/null || exit 0
 
 help: ## Self-documented Makefile
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) \
