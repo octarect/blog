@@ -9,9 +9,6 @@ RUN set -x \
  && zola build
 
 FROM nginx:1.17-alpine
-
 MAINTAINER Ryota Kota <ryota.kota@member.fsf.org>
-
 COPY --from=build /opt/site/public /usr/share/nginx/html
-
 EXPOSE 80
