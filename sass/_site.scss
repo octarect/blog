@@ -140,12 +140,11 @@ $site-margin-mobile: 0.25rem;
 
 			> img {
 				max-width: 98%;
+				border: solid 1px #333;
 
 				@include desktop {
 					max-width: 100%;
 				}
-
-				border: solid 1px #333;
 			}
 		}
 

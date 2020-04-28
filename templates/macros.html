@@ -27,10 +27,9 @@
       </div>
     </header>
     <section class="page-summary">
-      {% set image_url = self::get_page_thumbnail_url(page=page) %}
-      {% if image_url is containing(".") %}
+      {% if page.extra.thumbnail %}
       <div class="page-summary-thumbnail">
-        <img src="{{ image_url }}" />
+        <img src="{{ page.extra.thumbnail }}" />
       </div>
       {% endif %}
       <div class="page-summary-content">
